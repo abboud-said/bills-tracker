@@ -1,13 +1,229 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ========= CSS RESET & THEME ========= */
+:root {
+  --bg: #0b1020;
+  --bg-soft: #121933;
+  --card: #0f1730;
+  --text: #eaf0ff;
+  --muted: #b8c2e0;
+  --primary: #6b8cff;
+  --primary-600: #5a78e0;
+  --success: #2ecc71;
+  --success-600: #27ae60;
+  --ring: rgba(107, 140, 255, 0.45);
+  --shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.02);
+  --radius: 16px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--text);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(107,140,255,0.15), transparent 60%),
+    radial-gradient(1000px 500px at 100% 10%, rgba(46,204,113,0.12), transparent 60%),
+    var(--bg);
+}
+
+/* ========= APP LAYOUT ========= */
+.App {
+  display: grid;
+  place-items: start center;
+  min-height: 100%;
+  padding: 32px 16px 48px;
+}
+
+.container {
+  width: 100%;
+  max-width: 980px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)) , var(--bg-soft);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: calc(var(--radius) + 4px);
+  box-shadow: var(--shadow);
+  padding: 28px;
+}
+
+/* ========= HEADER ========= */
+.header {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.title {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 0.2px;
+}
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+}
+.total-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: rgba(107, 140, 255, 0.12);
+  color: var(--text);
+  border: 1px solid rgba(107, 140, 255, 0.25);
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+
+/* ========= CONTENT LAYOUT ========= */
+.content {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+}
+@media (max-width: 860px) {
+  .content { grid-template-columns: 1fr; }
+}
+
+.section-title {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  color: var(--text);
+}
+
+/* ========= BILLS GRID / CARD ========= */
+.bills-section { }
+
+.bills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+@media (max-width: 640px) {
+  .bills-grid { grid-template-columns: 1fr; }
+}
+
+.bill-card {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+}
+.bill-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(107, 140, 255, 0.35);
+  background: #0f1936;
+}
+
+.bill-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(107, 140, 255, 0.25), rgba(107, 140, 255, 0.05));
+  border: 1px solid rgba(107, 140, 255, 0.35);
+  font-size: 22px;
+}
+
+.bill-info { display: grid; gap: 6px; }
+.bill-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+.bill-amount {
+  margin: 0;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ========= FORM / ACTIONS ========= */
+.actions-section {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+}
+
+.form-card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+
+.form {
+  display: grid;
+  gap: 12px;
+}
+
+.field { display: grid; gap: 8px; }
+.label {
+  font-size: 12px;
+  color: var(--muted);
+}
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  color: var(--text);
+  background: #0c1329;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  outline: none;
+  transition: border 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+.input::placeholder { color: #94a3b8; }
+.input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--ring);
+  background: #0d1733;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+/* ========= BUTTONS ========= */
+.btn {
+  appearance: none;
+  border: 0;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 80ms ease, box-shadow 120ms ease, background 120ms ease, opacity 80ms ease;
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+.btn:active { transform: translateY(1px); }
+
+.btn-primary {
+  background: linear-gradient(180deg, var(--primary), var(--primary-600));
+}
+.btn-primary:hover { filter: brightness(1.05); }
+
+.btn-success {
+  background: linear-gradient(180deg, var(--success), var(--success-600));
+}
+.btn-success:hover { filter: brightness(1.05); }
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text);
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.04); }
+
+/* ========= FOOTER ========= */
+.footer {
+  margin-top: 28px;
+  color: var(--muted);
+  display: flex;
+  justify-content: center;
 }
